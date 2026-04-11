@@ -92,7 +92,11 @@
         <p>The original SSM was built under constraint — Google Sites, no design system, no tokens, a platform chosen for accessibility over design fidelity. It worked. But years later, with the platform unmaintained and the design landscape completely changed, I wanted to answer a different question: what would this look like if I built it right?</p>
         <p>Not a client brief. Not a work assignment. A self-directed reckoning with past work, applied skills, and a 2026 mindset.</p>
 
-        <figure class="cs-full-img">
+        <figure class="cs-artifact">
+          <div class="cs-artifact-chrome">
+            <span></span><span></span><span></span>
+            <div class="cs-artifact-url">sites.google.com/a/constantcontact.com/ssm</div>
+          </div>
           <img src="../images/SSM - IA - Old.png" alt="The original SSM built on Google Sites — grey circles, lorem ipsum placeholder content, no visual hierarchy" />
           <figcaption>The original SSM on Google Sites — the starting point. No design system, no tokens, and a layout constrained entirely by the platform's defaults.</figcaption>
         </figure>
@@ -107,21 +111,21 @@
         <h2>Design system first, screens second</h2>
         <div class="cs-phases">
           <div class="cs-phase">
-            <span class="cs-phase-num">Session 1–5</span>
+            <span class="cs-phase-num">Phase 1</span>
             <div>
               <div class="cs-phase-title">Foundation — tokens & typography</div>
               <div class="cs-phase-desc">Established the full token system: color (primary blue #1B55E5, dark navy, orange and green accents), Urbanist as the primary typeface, spacing scale, and border radius system. Built the base component set.</div>
             </div>
           </div>
           <div class="cs-phase">
-            <span class="cs-phase-num">Session 6</span>
+            <span class="cs-phase-num">Phase 2</span>
             <div>
               <div class="cs-phase-title">Home Hub — in progress</div>
               <div class="cs-phase-desc">Converting article card placeholders into proper components with exposed text properties and a boolean Has Image property wired to layer visibility. Featured Updates feed, Recently Opened, and Favorited panels.</div>
             </div>
           </div>
           <div class="cs-phase">
-            <span class="cs-phase-num">Session 7–8</span>
+            <span class="cs-phase-num">Phase 3</span>
             <div>
               <div class="cs-phase-title">Category & resource pages — documented</div>
               <div class="cs-phase-desc">Second-level page template with deal-stage filter tabs, pinned resource cards, and a compact reusable file row component that auto-populates from filename metadata.</div>
@@ -129,10 +133,44 @@
           </div>
         </div>
 
-        <figure class="cs-full-img" style="margin-top: 32px;">
-          <img src="../images/home-hub-draft.png" alt="Figma redesign of the SSM Home Hub — structured card components, token-based colors, and real content hierarchy replacing orange placeholder squares" />
-          <figcaption>Session 6 — the Home Hub mid-build in Figma. Orange placeholder squares are being replaced with fully-spec'd card components. Token-based colors, Urbanist typography, and real content regions are live.</figcaption>
-        </figure>
+        <div class="cs-system-grid">
+          <figure class="cs-system-cell">
+            <div class="cs-system-img">
+              <img src="../images/ssm-variables-image.png" alt="Figma variables panel showing the full SSM token set — color, spacing, and radius variables mapped to semantic names" />
+            </div>
+            <figcaption>
+              <span class="cs-system-cell-label">Tokens & Variables</span>
+              Color, spacing, and radius — defined once in Figma variables and referenced everywhere.
+            </figcaption>
+          </figure>
+          <figure class="cs-system-cell">
+            <div class="cs-system-img">
+              <img src="../images/ssm-components-image.png" alt="Figma component library — card variants, file row, filter tab, and icon components arranged in the SSM system" />
+            </div>
+            <figcaption>
+              <span class="cs-system-cell-label">Components</span>
+              Card, file row, filter tab, and nav — built as proper Figma components with exposed properties.
+            </figcaption>
+          </figure>
+          <figure class="cs-system-cell">
+            <div class="cs-system-img">
+              <img src="../images/ssm-styles-image.png" alt="Color palette and typography page — Urbanist type scale alongside the primary, accent, and surface color tokens" />
+            </div>
+            <figcaption>
+              <span class="cs-system-cell-label">Color & Typography</span>
+              Urbanist type scale paired with the full token palette — navy, blue, orange, and muted text.
+            </figcaption>
+          </figure>
+          <figure class="cs-system-cell">
+            <div class="cs-system-img">
+              <img src="../images/home-hub-draft.png" alt="Figma redesign of the SSM Home Hub — structured card components, token-based colors, and real content hierarchy" />
+            </div>
+            <figcaption>
+              <span class="cs-system-cell-label">Working Screen</span>
+              The Home Hub mid-build in Figma — token-based components, real content, and proper hierarchy taking shape.
+            </figcaption>
+          </figure>
+        </div>
       </div>
 
       <div class="cs-section fade-in">
@@ -261,6 +299,90 @@
         if (iframe && e.data.height > 200) {
           iframe.style.height = e.data.height + 'px';
         }
+      }
+    });
+
+  </script>
+
+  <!-- Lightbox overlay — must come before the script that references it -->
+  <div id="cs-lightbox">
+    <button id="cs-lightbox-close" aria-label="Close">✕</button>
+    <div id="cs-lightbox-inner">
+      <img id="cs-lightbox-img" src="" alt="" />
+      <div id="cs-lightbox-cap"></div>
+    </div>
+  </div>
+
+  <style>
+    #cs-lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(7, 15, 30, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    #cs-lightbox.open { display: flex; }
+    #cs-lightbox-inner {
+      max-width: 90vw; max-height: 90vh;
+      display: flex; flex-direction: column;
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    }
+    #cs-lightbox-img {
+      max-width: 90vw; max-height: calc(90vh - 48px);
+      object-fit: contain; display: block;
+    }
+    #cs-lightbox-cap {
+      background: rgba(11,22,40,0.96); padding: 12px 20px;
+      font-size: 12px; color: rgba(255,255,255,0.45);
+      font-family: 'Urbanist', sans-serif; letter-spacing: 0.06em;
+      text-transform: uppercase; font-weight: 600;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    #cs-lightbox-close {
+      position: fixed; top: 20px; right: 24px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7); border-radius: 50%;
+      width: 36px; height: 36px; font-size: 14px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+      font-family: sans-serif; line-height: 1;
+    }
+    #cs-lightbox-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  </style>
+
+  <script>
+    // ── Lightbox for .cs-system-cell images ──
+    var lightbox    = document.getElementById('cs-lightbox');
+    var lightboxImg = document.getElementById('cs-lightbox-img');
+    var lightboxCap = document.getElementById('cs-lightbox-cap');
+
+    document.querySelectorAll('.cs-system-cell').forEach(function(cell) {
+      cell.style.cursor = 'zoom-in';
+      cell.addEventListener('click', function() {
+        var img   = cell.querySelector('img');
+        var label = cell.querySelector('.cs-system-cell-label');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCap.textContent = label ? label.textContent : '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox || e.target.id === 'cs-lightbox-close') {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
       }
     });
   </script>

@@ -331,6 +331,88 @@ h3 { font-size: 1.1rem; }
 .cs-full-img img { width: 100%; display: block; }
 .cs-full-img figcaption { font-size: 12px; color: var(--text-dim); padding: 12px 16px; border-top: 1px solid var(--border); font-style: italic; }
 
+/* 2x2 design system showcase grid */
+.cs-system-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 32px 0;
+}
+.cs-system-cell {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.cs-system-img {
+  overflow: hidden;
+  background: var(--navy-mid);
+  aspect-ratio: 4/3;
+  position: relative;
+}
+.cs-system-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.cs-system-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(245,166,35,0.18) 0%, rgba(27,85,229,0.38) 100%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+.cs-system-cell:hover .cs-system-img::after { opacity: 0.5; }
+.cs-system-cell:hover .cs-system-img img { transform: scale(1.03); }
+.cs-system-cell figcaption {
+  padding: 14px 16px;
+  font-size: 12px; color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  line-height: 1.5;
+}
+.cs-system-cell-label {
+  display: block;
+  font-size: 11px; font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+@media (max-width: 600px) { .cs-system-grid { grid-template-columns: 1fr; } }
+
+/* Artifact frame — for "before" screenshots presented as historical artifacts */
+.cs-artifact {
+  margin: 32px auto;
+  max-width: 65%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--navy-card);
+}
+.cs-artifact-chrome {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 14px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+}
+.cs-artifact-chrome span {
+  display: block; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+}
+.cs-artifact-chrome span:nth-child(1) { background: rgba(255,90,80,0.45); }
+.cs-artifact-chrome span:nth-child(2) { background: rgba(255,190,40,0.45); }
+.cs-artifact-chrome span:nth-child(3) { background: rgba(40,200,80,0.45); }
+.cs-artifact-url {
+  flex: 1; text-align: center;
+  font-size: 10px; color: var(--text-dim);
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 4px; padding: 3px 10px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.cs-artifact img { width: 100%; display: block; opacity: 0.85; }
+.cs-artifact figcaption { font-size: 12px; color: var(--text-dim); padding: 12px 16px; border-top: 1px solid var(--border); font-style: italic; }
+@media (max-width: 900px) { .cs-artifact { max-width: 100%; } }
+
 /* Mockup iframe frame */
 .cs-mockup-frame {
   border-radius: var(--radius-lg);
