@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSM — Call Guides · 2026</title>
+</head>
+<body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0D1B3E; min-height: 100%; }
+  :root {
+    --navy: #0D1B3E; --card: #1C2A52; --card-hover: #243160;
+    --orange: #F5A623; --orange-dim: rgba(245,166,35,0.11);
+    --text: #FFFFFF; --muted: #8A9BC4; --dim: #5A6E9A;
+    --border: rgba(255,255,255,0.08); --border-hover: rgba(255,255,255,0.16);
+    --green: #2DCE89; --blue: #1B55E5;
+  }
+  .w { font-family: 'Urbanist', sans-serif; background: var(--navy); color: var(--text); }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px; background: rgba(13,27,62,0.97);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
+  .search-wrap { position: relative; display: flex; align-items: center; }
+  .search-ico { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; display: flex; align-items: center; }
+  .search-inp {
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+    padding: 5px 32px 5px 14px; font-size: 12px; color: var(--muted);
+    font-family: 'Urbanist', sans-serif; width: 96px; outline: none;
+    transition: border-color 0.25s, width 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .search-inp::placeholder { color: var(--dim); }
+  .search-inp:focus { border-color: rgba(245,166,35,0.45); width: 210px; color: var(--text); }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    display: flex; align-items: center; gap: 8px;
+    padding: 16px 32px 0; font-size: 12px; color: var(--dim);
+  }
+  .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.15s; cursor: pointer; }
+  .breadcrumb a:hover { color: var(--orange); }
+  .breadcrumb .sep { font-size: 10px; opacity: 0.4; }
+  .breadcrumb .current { color: var(--text); font-weight: 600; }
+
+  /* PAGE HEADER */
+  .page-header { padding: 24px 32px 28px; display: flex; align-items: flex-end; justify-content: space-between; }
+  .page-header-left { display: flex; align-items: center; gap: 16px; }
+  .page-icon {
+    width: 48px; height: 48px; background: var(--orange-dim);
+    border: 1px solid rgba(245,166,35,0.25); border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .page-icon svg { width: 22px; height: 22px; }
+  .page-header h1 { font-size: 26px; font-weight: 800; }
+  .page-header p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .page-count { font-size: 12px; color: var(--dim); }
+
+  /* FILTER TABS */
+  .filters {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 32px 24px;
+  }
+  .filter-tab {
+    font-size: 12px; font-weight: 600; padding: 6px 16px;
+    border-radius: 20px; border: 1px solid var(--border);
+    cursor: pointer; transition: all 0.15s; color: var(--muted);
+    background: transparent;
+    font-family: 'Urbanist', sans-serif;
+  }
+  .filter-tab:hover { border-color: var(--border-hover); color: var(--text); }
+  .filter-tab.active { background: var(--orange-dim); border-color: rgba(245,166,35,0.35); color: var(--orange); }
+
+  /* PINNED */
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--dim);
+    padding: 0 32px 12px;
+  }
+  .pinned { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; padding: 0 32px 32px; }
+  .pin-card {
+    background: var(--card); border-radius: 10px; border: 1px solid var(--border);
+    padding: 18px; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    display: flex; flex-direction: column; gap: 10px; position: relative;
+  }
+  .pin-card:hover { background: var(--card-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+  .pin-top { display: flex; align-items: center; justify-content: space-between; }
+  .file-type {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    padding: 2px 7px; border-radius: 4px;
+  }
+  .ft-pdf { background: rgba(229,69,27,0.15); color: #E5451B; border: 1px solid rgba(229,69,27,0.25); }
+  .ft-doc { background: rgba(27,85,229,0.15); color: #6B9FFF; border: 1px solid rgba(27,85,229,0.25); }
+  .ft-lnk { background: rgba(45,206,137,0.12); color: var(--green); border: 1px solid rgba(45,206,137,0.25); }
+  .new-badge {
+    font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+    background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(245,166,35,0.25);
+  }
+  .pin-card h3 { font-size: 13px; font-weight: 700; line-height: 1.35; }
+  .pin-card p { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .pin-meta { font-size: 11px; color: var(--dim); margin-top: 2px; }
+  .pin-actions { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+  .pin-btn {
+    font-size: 11px; color: var(--muted); cursor: pointer;
+    transition: color 0.15s; display: flex; align-items: center; gap: 4px;
+    background: none; border: none; font-family: 'Urbanist', sans-serif; padding: 0;
+  }
+  .pin-btn:hover { color: var(--orange); }
+
+  /* FILE LIST */
+  .file-list { padding: 0 32px 16px; display: flex; flex-direction: column; gap: 2px; }
+  .file-row {
+    display: grid; grid-template-columns: 24px 1fr auto auto auto;
+    align-items: center; gap: 14px;
+    padding: 11px 16px; border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  }
+  .file-row:hover { background: var(--card); border-color: var(--border); }
+  .file-row:hover .row-actions { opacity: 1; }
+  .file-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .file-icon svg { width: 16px; height: 16px; }
+  .file-name { font-size: 13px; font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file-stage { font-size: 11px; color: var(--dim); flex-shrink: 0; }
+  .file-date { font-size: 11px; color: var(--dim); flex-shrink: 0; min-width: 80px; text-align: right; }
+  .row-actions { display: flex; gap: 8px; opacity: 0; transition: opacity 0.15s; }
+  .row-act-btn { background: none; border: none; color: var(--muted); cursor: pointer; padding: 0; display: flex; align-items: center; transition: color 0.15s; font-family: 'Urbanist', sans-serif; }
+  .row-act-btn:hover { color: var(--orange); }
+
+  /* FOOTER NAV */
+  .footer-nav {
+    border-top: 1px solid var(--border);
+    padding: 28px 32px 20px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .footer-nav-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
+  .footer-links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .footer-link {
+    font-size: 12px; color: var(--muted); padding: 6px 14px;
+    border: 1px solid var(--border); border-radius: 20px;
+    cursor: pointer; transition: all 0.15s; text-decoration: none;
+  }
+  .footer-link:hover { color: var(--orange); border-color: rgba(245,166,35,0.3); background: var(--orange-dim); }
+  .footer-link.active { color: var(--orange); border-color: rgba(245,166,35,0.3); background: var(--orange-dim); }
+
+  footer {
+    background: #0A1430; border-top: 1px solid var(--border);
+    padding: 32px; display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  footer span { font-size: 17px; font-weight: 700; }
+</style>
+
+<div class="w">
+
+  <nav>
+    <span class="brand">Sales Success Map</span>
+    <div class="search-wrap">
+      <input class="search-inp" type="text" placeholder="Search…" />
+      <span class="search-ico">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <circle cx="5.5" cy="5.5" r="4" stroke="#8A9BC4" stroke-width="1.3"/>
+          <path d="M8.5 8.5L11 11" stroke="#8A9BC4" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </div>
+  </nav>
+
+  <div class="breadcrumb">
+    <a>Home</a>
+    <span class="sep">›</span>
+    <span class="current">Call Guides</span>
+  </div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-icon">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 012-2h1.5a1 1 0 011 .8l.6 3a1 1 0 01-.3.9l-1 .9a9 9 0 004.6 4.6l.9-1a1 1 0 01.9-.3l3 .6a1 1 0 01.8 1V15a2 2 0 01-2 2C7.2 17 3 12.8 3 7.5V5z" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <h1>Call Guides</h1>
+        <p>Scripts and talk tracks for every stage of the deal</p>
+      </div>
+    </div>
+    <span class="page-count">12 resources</span>
+  </div>
+
+  <div class="filters">
+    <button class="filter-tab active">All</button>
+    <button class="filter-tab">Cold Outreach</button>
+    <button class="filter-tab">Warm Lead</button>
+    <button class="filter-tab">Demo</button>
+    <button class="filter-tab">Close</button>
+    <button class="filter-tab">Follow-up</button>
+  </div>
+
+  <div class="section-label">Pinned</div>
+  <div class="pinned">
+    <div class="pin-card">
+      <div class="pin-top"><span class="file-type ft-pdf">PDF</span><span class="new-badge">New</span></div>
+      <h3>Master Call Framework 2026</h3>
+      <p>The full end-to-end call structure used across all deal stages. Start here.</p>
+      <div class="pin-meta">Updated March 28, 2026</div>
+      <div class="pin-actions">
+        <button class="pin-btn">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 9v1a1 1 0 001 1h8a1 1 0 001-1V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Open
+        </button>
+        <button class="pin-btn">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5l1.2 2.5 2.8.4-2 2 .5 2.8L6 8l-2.5 1.2.5-2.8-2-2 2.8-.4L6 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          Favorite
+        </button>
+      </div>
+    </div>
+    <div class="pin-card">
+      <div class="pin-top"><span class="file-type ft-doc">DOCX</span></div>
+      <h3>Warm Lead Script — Q4 Edition</h3>
+      <p>Updated talk track for prospects already familiar with Constant Contact.</p>
+      <div class="pin-meta">Updated March 25, 2026</div>
+      <div class="pin-actions">
+        <button class="pin-btn">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 9v1a1 1 0 001 1h8a1 1 0 001-1V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Open
+        </button>
+        <button class="pin-btn">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5l1.2 2.5 2.8.4-2 2 .5 2.8L6 8l-2.5 1.2.5-2.8-2-2 2.8-.4L6 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          Favorite
+        </button>
+      </div>
+    </div>
+    <div class="pin-card">
+      <div class="pin-top"><span class="file-type ft-lnk">LINK</span></div>
+      <h3>Ask for the Sale — Closing Language</h3>
+      <p>Proven closing phrases and the right moment to deploy each one.</p>
+      <div class="pin-meta">Updated March 20, 2026</div>
+      <div class="pin-actions">
+        <button class="pin-btn">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 9v1a1 1 0 001 1h8a1 1 0 001-1V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Open
+        </button>
+        <button class="pin-btn">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5l1.2 2.5 2.8.4-2 2 .5 2.8L6 8l-2.5 1.2.5-2.8-2-2 2.8-.4L6 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          Favorite
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">All Resources</div>
+  <div class="file-list">
+
+    <div class="file-row" data-stage="Cold Outreach">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#E5451B" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#E5451B" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">cold_outreach_script_v4.pdf</span>
+      <span class="file-stage">Cold Outreach</span>
+      <span class="file-date">Mar 15, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn" title="Open">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="row-act-btn" title="Favorite">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Warm Lead">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#6B9FFF" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#6B9FFF" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">warm_lead_callguide_q4.docx</span>
+      <span class="file-stage">Warm Lead</span>
+      <span class="file-date">Mar 25, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Demo">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#E5451B" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#E5451B" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">demo_call_script_enterprise.pdf</span>
+      <span class="file-stage">Demo</span>
+      <span class="file-date">Feb 10, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Follow-up">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#6B9FFF" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#6B9FFF" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">followup_sequence_30day.docx</span>
+      <span class="file-stage">Follow-up</span>
+      <span class="file-date">Jan 28, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Close">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#E5451B" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#E5451B" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">close_language_guide_v2.pdf</span>
+      <span class="file-stage">Close</span>
+      <span class="file-date">Mar 1, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Cold Outreach">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#6B9FFF" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#6B9FFF" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">cold_intro_email_templates.docx</span>
+      <span class="file-stage">Cold Outreach</span>
+      <span class="file-date">Dec 14, 2025</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Demo">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#E5451B" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#E5451B" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">demo_discovery_questions_smb.pdf</span>
+      <span class="file-stage">Demo</span>
+      <span class="file-date">Mar 8, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Warm Lead">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#6B9FFF" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#6B9FFF" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">reengagement_script_lapsed.docx</span>
+      <span class="file-stage">Warm Lead</span>
+      <span class="file-date">Feb 20, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Close">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#6B9FFF" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#6B9FFF" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">trial_close_phrases_v3.docx</span>
+      <span class="file-stage">Close</span>
+      <span class="file-date">Feb 5, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Follow-up">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#E5451B" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#E5451B" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">ghosted_prospect_recovery.pdf</span>
+      <span class="file-stage">Follow-up</span>
+      <span class="file-date">Jan 12, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Demo">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="14" rx="1.5" stroke="#6B9FFF" stroke-width="1.2"/><path d="M5 5h6M5 7.5h6M5 10h4" stroke="#6B9FFF" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <span class="file-name">product_demo_leave_behind.docx</span>
+      <span class="file-stage">Demo</span>
+      <span class="file-date">Mar 3, 2026</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <div class="file-row" data-stage="Cold Outreach">
+      <div class="file-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 100 12A6 6 0 008 2z" stroke="#2DCE89" stroke-width="1.2"/><path d="M5.5 8.5l2 2 3-3" stroke="#2DCE89" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="file-name">cold_call_voicemail_scripts</span>
+      <span class="file-stage">Cold Outreach</span>
+      <span class="file-date">Nov 30, 2025</span>
+      <div class="row-actions">
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7V10.5a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M6.5 1v7M4 4.5l2.5-2.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="row-act-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.8l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3L2.2 4.9l3-.4 1.3-2.7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-nav">
+    <span class="footer-nav-label">Quick Access</span>
+    <div class="footer-links">
+      <a class="footer-link active">Call Guides</a>
+      <a class="footer-link">One Pagers</a>
+      <a class="footer-link">Onboarding Resources</a>
+      <a class="footer-link">Objection Handling</a>
+      <a class="footer-link">Misc</a>
+    </div>
+  </div>
+
+  <footer>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="12" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><circle cx="13" cy="13" r="6.5" stroke="white" stroke-width="1.5" opacity="0.8"/><circle cx="13" cy="13" r="2.2" fill="white"/></svg>
+    <span>Constant Contact</span>
+  </footer>
+
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.filter-tab');
+  const rows = document.querySelectorAll('.file-row');
+  const countEl = document.querySelector('.page-count');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const filter = tab.textContent.trim();
+      let visible = 0;
+      rows.forEach(row => {
+        const stage = row.getAttribute('data-stage');
+        const show = filter === 'All' || stage === filter;
+        row.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      countEl.textContent = visible + ' resource' + (visible !== 1 ? 's' : '');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSM — Home Hub · 2026</title>
+</head>
+<body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0D1B3E; min-height: 100%; }
+  :root {
+    --navy: #0D1B3E;
+    --card: #1C2A52;
+    --card-hover: #243160;
+    --blue: #1B55E5;
+    --orange: #F5A623;
+    --orange-dim: rgba(245,166,35,0.12);
+    --text: #FFFFFF;
+    --muted: #8A9BC4;
+    --dim: #5A6E9A;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+  }
+  .w { font-family: 'Urbanist', sans-serif; background: var(--navy); color: var(--text); }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 32px; background: rgba(13,27,62,0.97);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .brand { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
+
+  .search-wrap { position: relative; display: flex; align-items: center; }
+  .search-ico {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    pointer-events: none; display: flex; align-items: center;
+  }
+  .search-inp {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 5px 32px 5px 14px;
+    font-size: 12px; color: var(--muted);
+    font-family: 'Urbanist', sans-serif;
+    width: 96px; outline: none;
+    transition: border-color 0.25s, width 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .search-inp::placeholder { color: var(--dim); }
+  .search-inp:focus { border-color: rgba(245,166,35,0.45); width: 210px; color: var(--text); }
+
+  /* HERO */
+  .hero { text-align: center; padding: 48px 32px 32px; }
+  .hero h1 { font-size: 34px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .hero p { font-size: 14px; color: var(--muted); }
+
+  /* CATEGORIES */
+  .cats { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; padding: 0 24px 32px; }
+  .cat {
+    background: var(--card); border-radius: 10px; border: 1px solid var(--border);
+    padding: 18px 14px 14px; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden;
+  }
+  .cat::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--orange); opacity: 0; transition: opacity 0.2s; }
+  .cat:hover { background: var(--card-hover); border-color: rgba(245,166,35,0.3); transform: translateY(-2px); }
+  .cat:hover::after { opacity: 1; }
+  .ico-wrap { width: 38px; height: 38px; background: var(--orange-dim); border: 1px solid rgba(245,166,35,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0; }
+  .cat:hover .ico-wrap { background: rgba(245,166,35,0.2); }
+  .ico-wrap svg { width: 18px; height: 18px; }
+  .cat h3 { font-size: 12px; font-weight: 700; line-height: 1.3; }
+  .cat p { font-size: 11px; color: var(--muted); line-height: 1.45; }
+  .arr { font-size: 12px; color: var(--orange); opacity: 0; transition: opacity 0.2s, transform 0.2s; align-self: flex-end; margin-top: auto; }
+  .cat:hover .arr { opacity: 1; transform: translateX(3px); }
+
+  /* MID ROW */
+  .mid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 24px 32px; }
+  .panel { background: var(--card); border-radius: 10px; border: 1px solid var(--border); padding: 22px; min-width: 0; }
+  .ptitle { font-size: 14px; font-weight: 700; color: var(--orange); margin-bottom: 16px; }
+  .upd { padding: 9px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: opacity 0.15s; }
+  .upd:last-child { border-bottom: none; }
+  .upd:hover { opacity: 0.7; }
+  .upd h4 { font-size: 12px; font-weight: 600; margin-bottom: 3px; line-height: 1.4; }
+  .upd span { font-size: 11px; color: var(--muted); }
+
+  .rcols { display: grid; grid-template-columns: 1fr 1fr; background: var(--card); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; min-width: 0; }
+  .rcol { padding: 22px 16px; min-width: 0; }
+  .rcol:first-child { border-right: 1px solid var(--border); }
+  .rcol-title { font-size: 13px; font-weight: 700; color: var(--orange); margin-bottom: 14px; text-align: center; }
+  .li { display: flex; align-items: center; justify-content: space-between; font-size: 11px; padding: 6px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: color 0.15s; gap: 4px; min-width: 0; }
+  .li:last-child { border-bottom: none; }
+  .li:hover { color: var(--orange); }
+  .li-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; flex: 1; }
+  .li span { color: var(--muted); font-size: 11px; flex-shrink: 0; }
+
+  /* ARTICLES */
+  .articles { padding: 0 24px 36px; display: flex; flex-direction: column; gap: 14px; }
+  .acard {
+    display: grid; grid-template-columns: 320px 1fr;
+    background: var(--card); border-radius: 10px; border: 1px solid var(--border);
+    overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .acard:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .aimg { overflow: hidden; position: relative; min-height: 190px; }
+  .aimg canvas { display: block; width: 100%; height: 100%; position: absolute; inset: 0; }
+  .abody { padding: 24px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .atag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); background: var(--orange-dim); border: 1px solid rgba(245,166,35,0.25); border-radius: 4px; padding: 3px 8px; margin-bottom: 10px; }
+  .abody h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .abody p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .ameta { font-size: 11px; color: var(--dim); margin-top: 16px; }
+
+  /* FOOTER */
+  footer { background: #0A1430; border-top: 1px solid var(--border); padding: 36px 32px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+  footer span { font-size: 17px; font-weight: 700; }
+</style>
+
+<div class="w">
+  <nav>
+    <span class="brand">Sales Success Map</span>
+    <div class="search-wrap">
+      <input class="search-inp" type="text" placeholder="Search…" />
+      <span class="search-ico">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <circle cx="5.5" cy="5.5" r="4" stroke="#8A9BC4" stroke-width="1.3"/>
+          <path d="M8.5 8.5L11 11" stroke="#8A9BC4" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Sales Success Map</h1>
+    <p>Your complete guide to winning more sales</p>
+  </div>
+
+  <div class="cats">
+    <div class="cat">
+      <div class="ico-wrap"><svg viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 012-2h1.5a1 1 0 011 .8l.6 3a1 1 0 01-.3.9l-1 .9a9 9 0 004.6 4.6l.9-1a1 1 0 01.9-.3l3 .6a1 1 0 01.8 1V15a2 2 0 01-2 2C7.2 17 3 12.8 3 7.5V5z" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      <div><h3>Call Guides</h3><p style="margin-top:4px">Scripts and talk tracks for every stage</p></div>
+      <span class="arr">→</span>
+    </div>
+    <div class="cat">
+      <div class="ico-wrap"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="2" stroke="#F5A623" stroke-width="1.5"/><path d="M6 6h8M6 9.5h8M6 13h5" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div><h3>One Pagers</h3><p style="margin-top:4px">Leave-behinds and prospect collateral</p></div>
+      <span class="arr">→</span>
+    </div>
+    <div class="cat">
+      <div class="ico-wrap"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="#F5A623" stroke-width="1.5"/><path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/><path d="M13.5 3.5l1.5 1.5-3 3" stroke="#F5A623" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><h3>Onboarding Resources</h3><p style="margin-top:4px">New hire materials and ramp guides</p></div>
+      <span class="arr">→</span>
+    </div>
+    <div class="cat">
+      <div class="ico-wrap"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2l1.8 5.5H18l-4.9 3.6 1.8 5.5L10 13l-4.9 3.6 1.8-5.5L2 7.5h6.2L10 2z" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      <div><h3>Objection Handling</h3><p style="margin-top:4px">Rebuttals and competitive battle cards</p></div>
+      <span class="arr">→</span>
+    </div>
+    <div class="cat">
+      <div class="ico-wrap"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1.5" stroke="#F5A623" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5" stroke="#F5A623" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5" stroke="#F5A623" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5" stroke="#F5A623" stroke-width="1.5"/></svg></div>
+      <div><h3>Misc</h3><p style="margin-top:4px">Tools, templates, and extras</p></div>
+      <span class="arr">→</span>
+    </div>
+  </div>
+
+  <div class="mid">
+    <div class="panel">
+      <div class="ptitle">Featured Updates</div>
+      <div class="upd"><h4>New Objection Handler: SaaS Competitors</h4><span>March 28, 2026</span></div>
+      <div class="upd"><h4>Fall Promo One Pager — Updated Pricing</h4><span>March 25, 2026</span></div>
+      <div class="upd"><h4>Warm Lead Call Guide v3 Released</h4><span>March 20, 2026</span></div>
+    </div>
+    <div class="rcols">
+      <div class="rcol">
+        <div class="rcol-title">Recently Opened</div>
+        <div class="li"><span class="li-name">onboarding_generalscript.docx</span><span>›</span></div>
+        <div class="li"><span class="li-name">Q3 Objection Handler</span></div>
+        <div class="li"><span class="li-name">Ask for the sale</span></div>
+        <div class="li"><span class="li-name">newhire_onboard_v2.pdf</span></div>
+        <div class="li"><span class="li-name">Ask for the sale</span></div>
+      </div>
+      <div class="rcol">
+        <div class="rcol-title">Favorited</div>
+        <div class="li"><span class="li-name">promotional_fall_onepager.docx</span><span>›</span></div>
+        <div class="li"><span class="li-name">Fall seasonal coupon codes</span></div>
+        <div class="li"><span class="li-name">Call Guide – warm lead</span></div>
+        <div class="li"><span class="li-name">Folder | Infographics</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="articles" id="articles">
+    <div class="acard">
+      <div class="aimg"><canvas id="c1"></canvas></div>
+      <div class="abody">
+        <div>
+          <span class="atag">Seasonal</span>
+          <h3>Fall Seasonal Update: New Promos Live</h3>
+          <p>Q4 is here and so are our biggest promotional offers of the year. This update covers the new pricing tiers, updated one-pagers for each segment, and the talking points your prospects need to hear heading into budget season.</p>
+        </div>
+        <div class="ameta">Promotions &nbsp;|&nbsp; March 30, 2026</div>
+      </div>
+    </div>
+    <div class="acard">
+      <div class="aimg"><canvas id="c2"></canvas></div>
+      <div class="abody">
+        <div>
+          <span class="atag">Onboarding</span>
+          <h3>New Hire Ramp Guide — Updated for 2026</h3>
+          <p>We've refreshed the full onboarding track to reflect our current product positioning and competitive landscape. New reps should start here — and managers, this is your go-to for 30/60/90 day check-ins.</p>
+        </div>
+        <div class="ameta">Onboarding Resources &nbsp;|&nbsp; March 28, 2026</div>
+      </div>
+    </div>
+    <div class="acard">
+      <div class="aimg"><canvas id="c3"></canvas></div>
+      <div class="abody">
+        <div>
+          <span class="atag">Call Guides</span>
+          <h3>How to Handle the "We Already Use a Competitor" Objection</h3>
+          <p>One of the most common pushbacks — and one of the most winnable. This guide walks through the four-step reframe, real talk tracks, and the questions that expose gaps in competitor value.</p>
+        </div>
+        <div class="ameta">Objection Handling &nbsp;|&nbsp; March 22, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="12" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><circle cx="13" cy="13" r="6.5" stroke="white" stroke-width="1.5" opacity="0.8"/><circle cx="13" cy="13" r="2.2" fill="white"/></svg>
+    <span>Constant Contact</span>
+  </footer>
+</div>
+
+<script>
+function drawArticleImg(canvasId, palette, label) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const parent = canvas.parentElement;
+  const w = parent.offsetWidth || 320;
+  const h = parent.offsetHeight || 190;
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+
+  const [bg1, bg2, acc1, acc2] = palette;
+  const grad = ctx.createLinearGradient(0, 0, w, h);
+  grad.addColorStop(0, bg1);
+  grad.addColorStop(1, bg2);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  ctx.globalAlpha = 0.18;
+  ctx.fillStyle = acc1;
+  ctx.beginPath(); ctx.arc(w * 0.15, h * 0.25, h * 0.55, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = acc2;
+  ctx.beginPath(); ctx.arc(w * 0.82, h * 0.75, h * 0.4, 0, Math.PI * 2); ctx.fill();
+  ctx.globalAlpha = 0.1;
+  ctx.fillStyle = acc1;
+  ctx.beginPath(); ctx.arc(w * 0.6, h * 0.2, h * 0.3, 0, Math.PI * 2); ctx.fill();
+  ctx.globalAlpha = 1;
+
+  const pill = label.toUpperCase();
+  ctx.font = '700 11px Urbanist, sans-serif';
+  const tw = ctx.measureText(pill).width;
+  const px = 14, rx = 5;
+  const bx = 20, by = h - 44, bw = tw + px*2, bh = 26;
+  ctx.fillStyle = 'rgba(245,166,35,0.18)';
+  ctx.strokeStyle = 'rgba(245,166,35,0.4)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(bx+rx, by); ctx.lineTo(bx+bw-rx, by);
+  ctx.quadraticCurveTo(bx+bw, by, bx+bw, by+rx);
+  ctx.lineTo(bx+bw, by+bh-rx);
+  ctx.quadraticCurveTo(bx+bw, by+bh, bx+bw-rx, by+bh);
+  ctx.lineTo(bx+rx, by+bh);
+  ctx.quadraticCurveTo(bx, by+bh, bx, by+bh-rx);
+  ctx.lineTo(bx, by+rx);
+  ctx.quadraticCurveTo(bx, by, bx+rx, by);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#F5A623';
+  ctx.fillText(pill, bx+px, by+17);
+}
+
+function renderAll() {
+  drawArticleImg('c1', ['#1a3a2a','#0d1f3c','#2DCE89','#1B55E5'], 'Seasonal');
+  drawArticleImg('c2', ['#1a2a40','#0d1830','#1B55E5','#2DCE89'], 'Onboarding');
+  drawArticleImg('c3', ['#2a1a10','#1a0d20','#F5A623','#E5451B'], 'Call Guides');
+}
+
+// Fire on load (works both standalone and in iframe)
+if (document.readyState === 'complete') {
+  renderAll();
+} else {
+  window.addEventListener('load', renderAll);
+}
+// Also fire after a short delay as fallback for iframe layout settling
+setTimeout(renderAll, 300);
+</script>
+</body>
+</html>

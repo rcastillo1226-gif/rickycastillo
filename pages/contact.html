@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="../images/RC_Favicon_300px.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Ricky Castillo</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container">
+      <a href="../index.html" class="nav-brand">Ricky <span>Castillo</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        <li><a href="#" class="nav-link cta">Resume ↗</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <ul class="nav-mobile">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="#" class="nav-link">Resume ↗</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="contact-wrap">
+      <p class="label" style="margin-bottom: 16px;">Get in touch</p>
+      <h1 style="margin-bottom: 16px;">Let's talk.</h1>
+      <p style="color: var(--text-muted); line-height: 1.7;">I'm currently open to Senior UX and Product Designer roles in Vancouver and remote Canada. If you're working on something that fits, I'd love to hear about it.</p>
+
+      <div style="display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap;">
+        <a href="mailto:r.castillo1226@gmail.com" class="btn btn-primary">r.castillo1226@gmail.com</a>
+        <a href="https://www.linkedin.com/in/rickycastillo1" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      </div>
+
+      <form class="contact-form" style="margin-top: 48px;" onsubmit="handleSubmit(event)">
+        <div style="border-top: 1px solid var(--border); padding-top: 32px; margin-bottom: 8px;">
+          <p class="label">Or send a message directly</p>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="Tell me about the role or project..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Send message →</button>
+        <div id="form-success" style="display:none; color: var(--green); font-size: 14px; padding: 12px 0;">Message sent — I'll be in touch soon.</div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-brand">Ricky <span style="color:var(--orange)">Castillo</span></div>
+          <p>Senior UX & Systems Designer based in Burnaby, BC.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Work</h4>
+          <a href="ssm-part1.html">SSM — Part 1</a>
+          <a href="ssm-part2.html">SSM — Part 2 ✦</a>
+          <a href="wayfair.html">Wayfair</a>
+          <a href="booking.html">Booking Flow</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://www.linkedin.com/in/rickycastillo1" target="_blank">LinkedIn ↗</a>
+          <a href="#">Resume ↗</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Ricky Castillo. Designed and built from scratch.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('form-success').style.display = 'block';
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
