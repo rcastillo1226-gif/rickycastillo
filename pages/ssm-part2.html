@@ -175,7 +175,7 @@
             <div class="cs-mockup-label">SSM — Call Guides (category page) · 2026</div>
             <a href="ssm_call_guides_l2.html" target="_blank" class="cs-mockup-link">Open fullscreen ↗</a>
           </div>
-          <iframe src="ssm_call_guides_l2.html" class="cs-mockup-iframe" style="height:1500px;" title="SSM Call Guides category page 2026 — live interactive prototype"></iframe>
+          <iframe src="ssm_call_guides_l2.html" class="cs-mockup-iframe" style="height:900px;" title="SSM Call Guides category page 2026 — live interactive prototype"></iframe>
           <a href="ssm_call_guides_l2.html" target="_blank" class="cs-mockup-open-btn">Tap to open interactive prototype ↗</a>
         </div>
       </div>
@@ -240,15 +240,28 @@
     document.querySelectorAll('.cs-mockup-iframe').forEach(function(iframe) {
       function resize() {
         try {
-          var h = iframe.contentDocument.documentElement.scrollHeight;
+          var doc = iframe.contentDocument;
+          var h = doc.body ? doc.body.scrollHeight : doc.documentElement.scrollHeight;
           if (h > 200) iframe.style.height = h + 'px';
         } catch(e) {}
       }
       iframe.addEventListener('load', function() {
         resize();
-        // Re-check after a short delay to catch any JS-driven layout changes (canvas, etc.)
         setTimeout(resize, 400);
       });
+    });
+
+    // Listen for height reports from child iframes (postMessage — more accurate than scrollHeight)
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'csIframeHeight') {
+        var selector = e.data.id === 'call-guides'
+          ? '[src="ssm_call_guides_l2.html"]'
+          : '[src="ssm_home_hub_v4.html"]';
+        var iframe = document.querySelector(selector);
+        if (iframe && e.data.height > 200) {
+          iframe.style.height = e.data.height + 'px';
+        }
+      }
     });
   </script>
 </body>

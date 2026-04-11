@@ -114,6 +114,31 @@
   /* FOOTER */
   footer { background: #0A1430; border-top: 1px solid var(--border); padding: 36px 32px; display: flex; align-items: center; justify-content: center; gap: 12px; }
   footer span { font-size: 17px; font-weight: 700; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 600px) {
+    nav { padding: 12px 16px; }
+    .search-inp { width: 80px; }
+    .search-inp:focus { width: 150px; }
+
+    .hero { padding: 32px 16px 24px; }
+    .hero h1 { font-size: 24px; }
+
+    .cats { grid-template-columns: 1fr 1fr; padding: 0 16px 24px; gap: 8px; }
+    .cat p { display: none; }
+
+    .mid { grid-template-columns: 1fr; padding: 0 16px 24px; }
+    .rcols { grid-template-columns: 1fr; }
+    .rcol:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+
+    .articles { padding: 0 16px 28px; }
+    .acard { grid-template-columns: 1fr; }
+    .aimg { min-height: 140px; }
+
+    .section-label { padding: 0 16px 10px; }
+
+    footer { padding: 24px 16px; }
+  }
 </style>
 
 <div class="w">
@@ -295,6 +320,8 @@ if (document.readyState === 'complete') {
 }
 // Also fire after a short delay as fallback for iframe layout settling
 setTimeout(renderAll, 300);
+// Re-render canvases if window resizes (handles orientation changes on mobile)
+window.addEventListener('resize', function() { setTimeout(renderAll, 100); });
 </script>
 </body>
 </html>
