@@ -293,6 +293,8 @@ h3 { font-size: 1.1rem; }
 .cs-hero-split--narrow { grid-template-columns: 1fr 300px; align-items: center; }
 .cs-hero-split-img { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: var(--navy-card); position: sticky; top: calc(var(--nav-h) + 24px); }
 .cs-hero-split-img img { width: 100%; display: block; }
+.cs-hero-split--narrow .cs-hero-split-img { position: relative; }
+.cs-hero-split--narrow .cs-hero-split-img::after { content: ''; position: absolute; inset: 0; background: rgba(11, 22, 40, 0.35); pointer-events: none; }
 @media (max-width: 900px) {
   .cs-hero-split,
   .cs-hero-split--narrow { grid-template-columns: 1fr; }
