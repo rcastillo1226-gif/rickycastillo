@@ -172,8 +172,14 @@ h3 { font-size: 1.1rem; }
 }
 .btn-primary {
   background: var(--blue); color: var(--white);
+  box-shadow: 0 4px 16px rgba(27, 85, 229, 0.3);
 }
-.btn-primary:hover { background: #1a4fd0; transform: translateY(-1px); }
+.btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(27, 85, 229, 0.55);
+  letter-spacing: 0.01em;
+}
 .btn-outline {
   background: transparent; color: var(--text-muted);
   border: 1px solid var(--border-md);
@@ -291,13 +297,15 @@ h3 { font-size: 1.1rem; }
 /* Hero split layout — summary left, image right */
 .cs-hero-split { display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: start; margin-top: 48px; }
 .cs-hero-split--narrow { grid-template-columns: 1fr 300px; align-items: center; }
+.cs-hero-split--p1 { grid-template-columns: 1fr 340px; align-items: start; }
 .cs-hero-split-img { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: var(--navy-card); position: sticky; top: calc(var(--nav-h) + 24px); }
 .cs-hero-split-img img { width: 100%; display: block; }
-.cs-hero-split--narrow .cs-hero-split-img { position: relative; }
-.cs-hero-split--narrow .cs-hero-split-img::after { content: ''; position: absolute; inset: 0; background: rgba(11, 22, 40, 0.35); pointer-events: none; }
+.cs-hero-split-img--dim { position: relative !important; top: 0 !important; }
+.cs-hero-split-img--dim::after { content: ''; position: absolute; inset: 0; background: rgba(11, 22, 40, 0.35); pointer-events: none; }
 @media (max-width: 900px) {
   .cs-hero-split,
-  .cs-hero-split--narrow { grid-template-columns: 1fr; }
+  .cs-hero-split--narrow,
+  .cs-hero-split--p1 { grid-template-columns: 1fr; }
   .cs-hero-split-img { position: static; max-width: 320px; margin: 0 auto; }
 }
 
