@@ -565,3 +565,44 @@ h3 { font-size: 1.1rem; }
   .about-skills { grid-template-columns: 1fr; }
   .cs-phases { gap: 8px; }
 }
+
+/* ─── LIGHTBOX ─── */
+#cs-lightbox {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(7, 15, 30, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+#cs-lightbox.open { display: flex; }
+#cs-lightbox-inner {
+  max-width: 90vw; max-height: 90vh;
+  display: flex; flex-direction: column;
+  border-radius: 10px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+}
+#cs-lightbox-img {
+  max-width: 90vw; max-height: calc(90vh - 48px);
+  object-fit: contain; display: block;
+}
+#cs-lightbox-cap {
+  background: rgba(11,22,40,0.96); padding: 12px 20px;
+  font-size: 12px; color: rgba(255,255,255,0.45);
+  font-family: 'Urbanist', sans-serif; letter-spacing: 0.06em;
+  text-transform: uppercase; font-weight: 600;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  min-height: 0;
+}
+#cs-lightbox-cap:empty { display: none; }
+#cs-lightbox-close {
+  position: fixed; top: 20px; right: 24px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7); border-radius: 50%;
+  width: 36px; height: 36px; font-size: 14px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  font-family: sans-serif; line-height: 1;
+}
+#cs-lightbox-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
