@@ -1,326 +1,589 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="../images/RC_Favicon_300px.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The SSM — 2026 Redesign · Part 2 · Ricky Castillo</title>
-  <meta name="description" content="Rebuilding the Sales Success Map from the ground up — tokens, components, and a live Home Hub prototype." />
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="../images/RC_Favicon_300px.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The SSM — 2026 Redesign · Part 2 · Ricky Castillo</title>
+    <meta
+      name="description"
+      content="Rebuilding the Sales Success Map from the ground up — tokens, components, and a live Home Hub prototype."
+    />
 
-  <!-- Open Graph / social preview -->
-  <meta property="og:type"        content="article" />
-  <meta property="og:url"         content="https://rickycastillo.ca/pages/ssm-part2.html" />
-  <meta property="og:title"       content="The SSM — 2026 Redesign · Part 2 · Ricky Castillo" />
-  <meta property="og:description" content="Rebuilding the Sales Success Map from the ground up — tokens, components, and a live Home Hub prototype." />
-  <meta property="og:image"       content="https://rickycastillo.ca/images/og-preview.png" />
-  <meta property="og:image:width"  content="1200" />
-  <meta property="og:image:height" content="630" />
+    <!-- Open Graph / social preview -->
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://rickycastillo.ca/pages/ssm-part2.html"
+    />
+    <meta
+      property="og:title"
+      content="The SSM — 2026 Redesign · Part 2 · Ricky Castillo"
+    />
+    <meta
+      property="og:description"
+      content="Rebuilding the Sales Success Map from the ground up — tokens, components, and a live Home Hub prototype."
+    />
+    <meta
+      property="og:image"
+      content="https://rickycastillo.ca/images/og-preview.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="The SSM — 2026 Redesign · Part 2 · Ricky Castillo" />
-  <meta name="twitter:description" content="Rebuilding the Sales Success Map from the ground up — tokens, components, and a live Home Hub prototype." />
-  <meta name="twitter:image"       content="https://rickycastillo.ca/images/og-preview.png" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="The SSM — 2026 Redesign · Part 2 · Ricky Castillo"
+    />
+    <meta
+      name="twitter:description"
+      content="Rebuilding the Sales Success Map from the ground up — tokens, components, and a live Home Hub prototype."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rickycastillo.ca/images/og-preview.png"
+    />
 
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-</head>
-<body>
-
-  <nav class="nav">
-    <div class="container">
-      <a href="../index.html" class="nav-brand">Ricky <span>Castillo</span></a>
-      <ul class="nav-links">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container">
+        <a href="../index.html" class="nav-brand"
+          >Ricky <span>Castillo</span></a
+        >
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li>
+            <a
+              href="../links/Ricky_Castillo_UX_Systems_Designer_General.pdf"
+              class="nav-link cta"
+              target="_blank"
+              download
+              >Resume ↗</a
+            >
+          </li>
+        </ul>
+        <button
+          class="nav-mobile-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path
+              d="M3 6h16M3 11h16M3 16h16"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <ul class="nav-mobile">
         <li><a href="../index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="../links/Ricky_Castillo_UX_Systems_Designer_General.pdf" class="nav-link cta" target="_blank" download>Resume ↗</a></li>
+        <li>
+          <a
+            href="../links/Ricky_Castillo_UX_Systems_Designer_General.pdf"
+            class="nav-link"
+            target="_blank"
+            download
+            >Resume ↗</a
+          >
+        </li>
       </ul>
-      <button class="nav-mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
-    <ul class="nav-mobile">
-      <li><a href="../index.html" class="nav-link">Home</a></li>
-      <li><a href="about.html" class="nav-link">About</a></li>
-      <li><a href="contact.html" class="nav-link">Contact</a></li>
-      <li><a href="../links/Ricky_Castillo_UX_Systems_Designer_General.pdf" class="nav-link" target="_blank" download>Resume ↗</a></li>
-    </ul>
-  </nav>
+    </nav>
 
-  <div class="container">
-    <section class="cs-hero">
-      <div class="cs-previously">
-        <span>Part 2 of 2</span>
-        <span class="cs-previously-divider">·</span>
-        <span>This story started in 2018.</span>
-        <a href="ssm-part1.html">← Read Part 1 first</a>
-      </div>
-      <div style="display:inline-flex; align-items:center; gap:8px; background:var(--blue-dim); border:1px solid rgba(27,85,229,0.2); border-radius:20px; padding:4px 14px; margin-bottom:20px;">
-        <span style="font-size:11px; font-weight:600; color:#7AAAF5; letter-spacing:0.06em;">New · 2026 Redesign</span>
-      </div>
-      <p class="cs-hero-label label">Constant Contact · Self-directed · 2026</p>
-      <h1>The SSM — 2026 Redesign</h1>
-      <p class="cs-hero-desc">Returning to a platform I built six years earlier, with a design system, component tokens, and a completely different set of tools, to rebuild it from the ground up.</p>
-      <div class="cs-meta-grid">
-        <div class="cs-meta-item"><div class="cs-meta-label">Role</div><div class="cs-meta-value">Self-directed</div></div>
-        <div class="cs-meta-item"><div class="cs-meta-label">Tools</div><div class="cs-meta-value">Figma, HTML/CSS, Claude AI</div></div>
-        <div class="cs-meta-item"><div class="cs-meta-label">Type</div><div class="cs-meta-value">Portfolio & systems exploration</div></div>
-        <div class="cs-meta-item"><div class="cs-meta-label">Status</div><div class="cs-meta-value">In progress · 2026</div></div>
-      </div>
+    <div class="container">
+      <section class="cs-hero">
+        <div class="cs-previously">
+          <span>Part 2 of 2</span>
+          <span class="cs-previously-divider">·</span>
+          <span>This story started in 2018.</span>
+          <a href="ssm-part1.html">← Read Part 1 first</a>
+        </div>
+        <div
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue-dim);
+            border: 1px solid rgba(27, 85, 229, 0.2);
+            border-radius: 20px;
+            padding: 4px 14px;
+            margin-bottom: 20px;
+          "
+        >
+          <span
+            style="
+              font-size: 11px;
+              font-weight: 600;
+              color: #7aaaf5;
+              letter-spacing: 0.06em;
+            "
+            >New · 2026 Redesign</span
+          >
+        </div>
+        <p class="cs-hero-label label">
+          Constant Contact · Self-directed · 2026
+        </p>
+        <h1>The SSM — 2026 Redesign</h1>
+        <p class="cs-hero-desc">
+          Returning to a platform I built six years earlier, with a design
+          system, component tokens, and a completely different set of tools, to
+          rebuild it from the ground up.
+        </p>
+        <div class="cs-meta-grid">
+          <div class="cs-meta-item">
+            <div class="cs-meta-label">Role</div>
+            <div class="cs-meta-value">Self-directed</div>
+          </div>
+          <div class="cs-meta-item">
+            <div class="cs-meta-label">Tools</div>
+            <div class="cs-meta-value">Figma, HTML/CSS, Claude AI</div>
+          </div>
+          <div class="cs-meta-item">
+            <div class="cs-meta-label">Type</div>
+            <div class="cs-meta-value">Portfolio & systems exploration</div>
+          </div>
+          <div class="cs-meta-item">
+            <div class="cs-meta-label">Status</div>
+            <div class="cs-meta-value">In progress · 2026</div>
+          </div>
+        </div>
 
-      <div class="cs-hero-split cs-hero-split--narrow fade-in">
-        <div class="cs-hero-split-text">
-          <div class="cs-section-label" style="margin-bottom:16px;">Quick summary</div>
+        <div class="cs-hero-split cs-hero-split--narrow fade-in">
+          <div class="cs-hero-split-text">
+            <div class="cs-section-label" style="margin-bottom: 16px">
+              Quick summary
+            </div>
+            <div class="cs-phases">
+              <div class="cs-phase">
+                <span class="cs-phase-num">Why revisit it</span>
+                <div>
+                  <div class="cs-phase-desc">
+                    The original SSM was built under real constraint: Google
+                    Sites, no tokens, no design system. It worked, but the
+                    platform aged out and the design landscape moved on. This is
+                    the rebuild.
+                  </div>
+                </div>
+              </div>
+              <div class="cs-phase">
+                <span class="cs-phase-num">The work</span>
+                <div>
+                  <div class="cs-phase-desc">
+                    Design system first: full token set, Urbanist typography,
+                    component library. Then screens: Home Hub, category pages,
+                    file row components — built in Figma and prototyped in
+                    HTML/CSS.
+                  </div>
+                </div>
+              </div>
+              <div class="cs-phase">
+                <span class="cs-phase-num">Status</span>
+                <div>
+                  <div class="cs-phase-desc">
+                    In progress and documented live. Both the Figma system and
+                    the working HTML prototype are embedded in this page, not
+                    screenshots.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cs-hero-split-img" style="max-width: 320px">
+            <img
+              src="../images/ssm-part-two-hero-image.png"
+              alt="SSM 2026 redesign — Home Hub in Figma, mid-build with token-based components"
+            />
+          </div>
+        </div>
+      </section>
+
+      <div class="cs-body">
+        <div class="cs-section fade-in">
+          <div class="cs-section-label">Why revisit it</div>
+          <h2>The tool was abandoned. The problem wasn't.</h2>
+          <p>
+            The original SSM was built under constraint: Google Sites, no design
+            system, no tokens, a platform chosen for accessibility over design
+            fidelity. It worked. But years later, with the platform unmaintained
+            and the design landscape completely changed, I wanted to answer a
+            different question: what would this look like if I built it right?
+          </p>
+          <p>
+            Not a client brief. Not a work assignment. A self-directed reckoning
+            with past work, applied skills, and a 2026 mindset.
+          </p>
+
+          <figure class="cs-artifact">
+            <div class="cs-artifact-chrome">
+              <span></span><span></span><span></span>
+              <div class="cs-artifact-url">
+                sites.google.com/a/constantcontact.com/ssm
+              </div>
+            </div>
+            <img
+              src="../images/SSM - IA - Old.png"
+              alt="The original SSM built on Google Sites — grey circles, lorem ipsum placeholder content, no visual hierarchy"
+            />
+            <figcaption>
+              The original SSM on Google Sites, the starting point. No design
+              system, no tokens, and a layout constrained entirely by the
+              platform's defaults.
+            </figcaption>
+          </figure>
+
+          <div class="cs-callout">
+            <p>
+              This redesign is being documented as it's built: the Figma
+              rebuild, the component system, the before & after comparison. This
+              page will grow as the work does.
+            </p>
+          </div>
+        </div>
+
+        <div class="cs-section fade-in">
+          <div class="cs-section-label">The approach</div>
+          <h2>Design system first, screens second</h2>
           <div class="cs-phases">
             <div class="cs-phase">
-              <span class="cs-phase-num">Why revisit it</span>
+              <span class="cs-phase-num">Phase 1</span>
               <div>
-                <div class="cs-phase-desc">The original SSM was built under real constraint: Google Sites, no tokens, no design system. It worked, but the platform aged out and the design landscape moved on. This is the rebuild.</div>
+                <div class="cs-phase-title">
+                  Foundation — tokens & typography
+                </div>
+                <div class="cs-phase-desc">
+                  Established the full token system: color (primary blue
+                  #1B55E5, dark navy, orange and green accents), Urbanist as the
+                  primary typeface, spacing scale, and border radius system.
+                  Built the base component set.
+                </div>
               </div>
             </div>
             <div class="cs-phase">
-              <span class="cs-phase-num">The work</span>
+              <span class="cs-phase-num">Phase 2</span>
               <div>
-                <div class="cs-phase-desc">Design system first: full token set, Urbanist typography, component library. Then screens: Home Hub, category pages, file row components — built in Figma and prototyped in HTML/CSS.</div>
+                <div class="cs-phase-title">Home Hub — in progress</div>
+                <div class="cs-phase-desc">
+                  Converting article card placeholders into proper components
+                  with exposed text properties and a boolean Has Image property
+                  wired to layer visibility. Featured Updates feed, Recently
+                  Opened, and Favorited panels.
+                </div>
               </div>
             </div>
             <div class="cs-phase">
-              <span class="cs-phase-num">Status</span>
+              <span class="cs-phase-num">Phase 3</span>
               <div>
-                <div class="cs-phase-desc">In progress and documented live. Both the Figma system and the working HTML prototype are embedded in this page, not screenshots.</div>
+                <div class="cs-phase-title">
+                  Category & resource pages — documented
+                </div>
+                <div class="cs-phase-desc">
+                  Second-level page template with deal-stage filter tabs, pinned
+                  resource cards, and a compact reusable file row component that
+                  auto-populates from filename metadata.
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="cs-hero-split-img" style="max-width:320px;">
-          <img src="../images/ssm-part-two-hero-image.png" alt="SSM 2026 redesign — Home Hub in Figma, mid-build with token-based components" />
-        </div>
-      </div>
-    </section>
 
-    <div class="cs-body">
-      <div class="cs-section fade-in">
-        <div class="cs-section-label">Why revisit it</div>
-        <h2>The tool was abandoned. The problem wasn't.</h2>
-        <p>The original SSM was built under constraint: Google Sites, no design system, no tokens, a platform chosen for accessibility over design fidelity. It worked. But years later, with the platform unmaintained and the design landscape completely changed, I wanted to answer a different question: what would this look like if I built it right?</p>
-        <p>Not a client brief. Not a work assignment. A self-directed reckoning with past work, applied skills, and a 2026 mindset.</p>
-
-        <figure class="cs-artifact">
-          <div class="cs-artifact-chrome">
-            <span></span><span></span><span></span>
-            <div class="cs-artifact-url">sites.google.com/a/constantcontact.com/ssm</div>
+          <div class="cs-system-grid">
+            <figure class="cs-system-cell">
+              <div class="cs-system-img">
+                <img
+                  src="../images/ssm-variables-image.png"
+                  alt="Figma variables panel showing the full SSM token set — color, spacing, and radius variables mapped to semantic names"
+                />
+              </div>
+              <figcaption>
+                <span class="cs-system-cell-label">Tokens & Variables</span>
+                Color, spacing, and radius, defined once in Figma variables and
+                referenced everywhere.
+              </figcaption>
+            </figure>
+            <figure class="cs-system-cell">
+              <div class="cs-system-img">
+                <img
+                  src="../images/ssm-components-image.png"
+                  alt="Figma component library — card variants, file row, filter tab, and icon components arranged in the SSM system"
+                />
+              </div>
+              <figcaption>
+                <span class="cs-system-cell-label">Components</span>
+                Card, file row, filter tab, and nav, built as proper Figma
+                components with exposed properties.
+              </figcaption>
+            </figure>
+            <figure class="cs-system-cell">
+              <div class="cs-system-img">
+                <img
+                  src="../images/ssm-styles-image.png"
+                  alt="Color palette and typography page — Urbanist type scale alongside the primary, accent, and surface color tokens"
+                />
+              </div>
+              <figcaption>
+                <span class="cs-system-cell-label">Color & Typography</span>
+                Urbanist type scale paired with the full token palette: navy,
+                blue, orange, and muted text.
+              </figcaption>
+            </figure>
+            <figure class="cs-system-cell">
+              <div class="cs-system-img">
+                <img
+                  src="../images/home-hub-draft.png"
+                  alt="Figma redesign of the SSM Home Hub — structured card components, token-based colors, and real content hierarchy"
+                />
+              </div>
+              <figcaption>
+                <span class="cs-system-cell-label">Working Screen</span>
+                The Home Hub mid-build in Figma, with token-based components,
+                real content, and proper hierarchy taking shape.
+              </figcaption>
+            </figure>
           </div>
-          <img src="../images/SSM - IA - Old.png" alt="The original SSM built on Google Sites — grey circles, lorem ipsum placeholder content, no visual hierarchy" />
-          <figcaption>The original SSM on Google Sites, the starting point. No design system, no tokens, and a layout constrained entirely by the platform's defaults.</figcaption>
-        </figure>
-
-        <div class="cs-callout">
-          <p>This redesign is being documented as it's built: the Figma rebuild, the component system, the before & after comparison. This page will grow as the work does.</p>
         </div>
-      </div>
 
-      <div class="cs-section fade-in">
-        <div class="cs-section-label">The approach</div>
-        <h2>Design system first, screens second</h2>
-        <div class="cs-phases">
-          <div class="cs-phase">
-            <span class="cs-phase-num">Phase 1</span>
+        <div class="cs-section fade-in">
+          <div class="cs-section-label">Key decisions</div>
+          <h2>What changed and why</h2>
+          <p>
+            The original relied on spatial padding to signal hierarchy, a Google
+            Sites default that got accepted as a layout decision. This version
+            collapses that distance intentionally: the hero is typographic
+            rather than image-heavy, category cards have real affordance rather
+            than being passive folder icons, and editorial content is woven into
+            the same page rather than sitting below an awkward empty zone.
+          </p>
+
+          <figure class="cs-full-img">
+            <img
+              src="../images/SSM Information Architecture.png"
+              alt="Information architecture diagram showing the full SSM structure — Home Hub at the top, branching into category pages, then down to individual content endpoints"
+            />
+            <figcaption>
+              The full IA mapped out: Home Hub → category page → content
+              endpoint. Every navigation decision in the redesign flows from
+              this structure. The two-click depth rule from the original is
+              preserved, now enforced at the component level.
+            </figcaption>
+          </figure>
+
+          <p>
+            Folder navigation was replaced with flat filtered lists. A
+            deal-stage filter bar lets reps narrow by Cold, Warm, Demo, Close,
+            and Follow-up without drilling into nested folders. The two-click
+            depth rule from the original content governance policy is preserved,
+            but now enforced at the component level rather than by convention.
+          </p>
+          <p>
+            File rows replace plain text links throughout. Each row reads the
+            filename, surfaces the file type as a color-coded icon, and exposes
+            Open and Favorite actions on hover. The component is reusable across
+            every category page.
+          </p>
+        </div>
+
+        <div class="cs-section fade-in">
+          <div class="cs-section-label">The 2026 result</div>
+          <h2>From placeholder to working prototype</h2>
+          <p>
+            Both screens are live, built in HTML/CSS with the full Urbanist
+            design system, token-based color, and interactive states. The Home
+            Hub covers the top-level navigation experience. The Call Guides page
+            shows a second-level category with deal-stage filtering, pinned
+            resources, and file rows in action.
+          </p>
+          <p>Scroll, hover, and interact. These aren't screenshots.</p>
+
+          <div class="cs-mockup-frame">
+            <div class="cs-mockup-bar">
+              <div class="cs-mockup-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="cs-mockup-label">SSM — Home Hub · 2026</div>
+              <a
+                href="ssm_home_hub_v4.html"
+                target="_blank"
+                class="cs-mockup-link"
+                >Open fullscreen ↗</a
+              >
+            </div>
+            <iframe
+              src="ssm_home_hub_v4.html"
+              class="cs-mockup-iframe"
+              style="height: 1380px"
+              title="SSM Home Hub 2026 — live interactive prototype"
+            ></iframe>
+            <a
+              href="ssm_home_hub_v4.html"
+              target="_blank"
+              class="cs-mockup-open-btn"
+              >Tap to open interactive prototype ↗</a
+            >
+          </div>
+
+          <div class="cs-mockup-frame" style="margin-top: 32px">
+            <div class="cs-mockup-bar">
+              <div class="cs-mockup-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="cs-mockup-label">
+                SSM — Call Guides (category page) · 2026
+              </div>
+              <a
+                href="ssm_call_guides_l2.html"
+                target="_blank"
+                class="cs-mockup-link"
+                >Open fullscreen ↗</a
+              >
+            </div>
+            <iframe
+              src="ssm_call_guides_l2.html"
+              class="cs-mockup-iframe"
+              style="height: 900px"
+              title="SSM Call Guides category page 2026 — live interactive prototype"
+            ></iframe>
+            <a
+              href="ssm_call_guides_l2.html"
+              target="_blank"
+              class="cs-mockup-open-btn"
+              >Tap to open interactive prototype ↗</a
+            >
+          </div>
+        </div>
+
+        <div class="cs-section fade-in">
+          <div class="cs-section-label">Forward thinking</div>
+          <h2>Where this could go</h2>
+          <p>
+            Rebuilding this tool brought up a question the original never asked:
+            what if the system could understand its own content? File rows
+            auto-populating from filenames is a start. But the same logic
+            extends further. Document metadata (author, modified date, word
+            count), full-text indexing for search that finds content buried
+            inside PDFs, and AI-assisted tagging that categorizes new uploads by
+            deal stage automatically.
+          </p>
+          <p>
+            None of that is in scope for this demonstration. But getting there
+            organically, through the rebuild rather than a product brief, is the
+            point. The best product questions come from actually using the thing
+            you built.
+          </p>
+        </div>
+
+        <div style="padding: 40px 0 16px" class="fade-in">
+          <a
+            href="ssm-part1.html"
+            class="cs-next"
+            style="
+              border-top: none;
+              border-bottom: 1px solid var(--border);
+              padding-bottom: 16px;
+              margin-bottom: 16px;
+            "
+          >
             <div>
-              <div class="cs-phase-title">Foundation — tokens & typography</div>
-              <div class="cs-phase-desc">Established the full token system: color (primary blue #1B55E5, dark navy, orange and green accents), Urbanist as the primary typeface, spacing scale, and border radius system. Built the base component set.</div>
+              <div class="cs-next-label">← Back to</div>
+              <div class="cs-next-title">Part 1 — The original build</div>
             </div>
-          </div>
-          <div class="cs-phase">
-            <span class="cs-phase-num">Phase 2</span>
+            <span class="cs-next-arrow">←</span>
+          </a>
+          <a href="wayfair.html" class="cs-next">
             <div>
-              <div class="cs-phase-title">Home Hub — in progress</div>
-              <div class="cs-phase-desc">Converting article card placeholders into proper components with exposed text properties and a boolean Has Image property wired to layer visibility. Featured Updates feed, Recently Opened, and Favorited panels.</div>
+              <div class="cs-next-label">Next project</div>
+              <div class="cs-next-title">
+                Wayfair: Spatial Logistics & Mapping
+              </div>
             </div>
-          </div>
-          <div class="cs-phase">
-            <span class="cs-phase-num">Phase 3</span>
-            <div>
-              <div class="cs-phase-title">Category & resource pages — documented</div>
-              <div class="cs-phase-desc">Second-level page template with deal-stage filter tabs, pinned resource cards, and a compact reusable file row component that auto-populates from filename metadata.</div>
-            </div>
-          </div>
+            <span class="cs-next-arrow">→</span>
+          </a>
         </div>
-
-        <div class="cs-system-grid">
-          <figure class="cs-system-cell">
-            <div class="cs-system-img">
-              <img src="../images/ssm-variables-image.png" alt="Figma variables panel showing the full SSM token set — color, spacing, and radius variables mapped to semantic names" />
-            </div>
-            <figcaption>
-              <span class="cs-system-cell-label">Tokens & Variables</span>
-              Color, spacing, and radius, defined once in Figma variables and referenced everywhere.
-            </figcaption>
-          </figure>
-          <figure class="cs-system-cell">
-            <div class="cs-system-img">
-              <img src="../images/ssm-components-image.png" alt="Figma component library — card variants, file row, filter tab, and icon components arranged in the SSM system" />
-            </div>
-            <figcaption>
-              <span class="cs-system-cell-label">Components</span>
-              Card, file row, filter tab, and nav, built as proper Figma components with exposed properties.
-            </figcaption>
-          </figure>
-          <figure class="cs-system-cell">
-            <div class="cs-system-img">
-              <img src="../images/ssm-styles-image.png" alt="Color palette and typography page — Urbanist type scale alongside the primary, accent, and surface color tokens" />
-            </div>
-            <figcaption>
-              <span class="cs-system-cell-label">Color & Typography</span>
-              Urbanist type scale paired with the full token palette: navy, blue, orange, and muted text.
-            </figcaption>
-          </figure>
-          <figure class="cs-system-cell">
-            <div class="cs-system-img">
-              <img src="../images/home-hub-draft.png" alt="Figma redesign of the SSM Home Hub — structured card components, token-based colors, and real content hierarchy" />
-            </div>
-            <figcaption>
-              <span class="cs-system-cell-label">Working Screen</span>
-              The Home Hub mid-build in Figma, with token-based components, real content, and proper hierarchy taking shape.
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div class="cs-section fade-in">
-        <div class="cs-section-label">Key decisions</div>
-        <h2>What changed and why</h2>
-        <p>The original relied on spatial padding to signal hierarchy, a Google Sites default that got accepted as a layout decision. This version collapses that distance intentionally: the hero is typographic rather than image-heavy, category cards have real affordance rather than being passive folder icons, and editorial content is woven into the same page rather than sitting below an awkward empty zone.</p>
-
-        <figure class="cs-full-img">
-          <img src="../images/SSM Information Architecture.png" alt="Information architecture diagram showing the full SSM structure — Home Hub at the top, branching into category pages, then down to individual content endpoints" />
-          <figcaption>The full IA mapped out: Home Hub → category page → content endpoint. Every navigation decision in the redesign flows from this structure. The two-click depth rule from the original is preserved, now enforced at the component level.</figcaption>
-        </figure>
-
-        <p>Folder navigation was replaced with flat filtered lists. A deal-stage filter bar lets reps narrow by Cold, Warm, Demo, Close, and Follow-up without drilling into nested folders. The two-click depth rule from the original content governance policy is preserved, but now enforced at the component level rather than by convention.</p>
-        <p>File rows replace plain text links throughout. Each row reads the filename, surfaces the file type as a color-coded icon, and exposes Open and Favorite actions on hover. The component is reusable across every category page.</p>
-      </div>
-
-      <div class="cs-section fade-in">
-        <div class="cs-section-label">The 2026 result</div>
-        <h2>From placeholder to working prototype</h2>
-        <p>Both screens are live, built in HTML/CSS with the full Urbanist design system, token-based color, and interactive states. The Home Hub covers the top-level navigation experience. The Call Guides page shows a second-level category with deal-stage filtering, pinned resources, and file rows in action.</p>
-        <p>Scroll, hover, and interact. These aren't screenshots.</p>
-
-        <div class="cs-mockup-frame">
-          <div class="cs-mockup-bar">
-            <div class="cs-mockup-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="cs-mockup-label">SSM — Home Hub · 2026</div>
-            <a href="ssm_home_hub_v4.html" target="_blank" class="cs-mockup-link">Open fullscreen ↗</a>
-          </div>
-          <iframe src="ssm_home_hub_v4.html" class="cs-mockup-iframe" style="height:1380px;" title="SSM Home Hub 2026 — live interactive prototype"></iframe>
-          <a href="ssm_home_hub_v4.html" target="_blank" class="cs-mockup-open-btn">Tap to open interactive prototype ↗</a>
-        </div>
-
-        <div class="cs-mockup-frame" style="margin-top: 32px;">
-          <div class="cs-mockup-bar">
-            <div class="cs-mockup-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="cs-mockup-label">SSM — Call Guides (category page) · 2026</div>
-            <a href="ssm_call_guides_l2.html" target="_blank" class="cs-mockup-link">Open fullscreen ↗</a>
-          </div>
-          <iframe src="ssm_call_guides_l2.html" class="cs-mockup-iframe" style="height:900px;" title="SSM Call Guides category page 2026 — live interactive prototype"></iframe>
-          <a href="ssm_call_guides_l2.html" target="_blank" class="cs-mockup-open-btn">Tap to open interactive prototype ↗</a>
-        </div>
-      </div>
-
-      <div class="cs-section fade-in">
-        <div class="cs-section-label">Forward thinking</div>
-        <h2>Where this could go</h2>
-        <p>Rebuilding this tool surfaced a question the original never asked: what if the system could understand its own content? File rows auto-populating from filenames is a start. But the same logic extends further — document metadata (author, modified date, word count), full-text indexing for search that surfaces content buried inside PDFs, and AI-assisted tagging that categorizes new uploads by deal stage automatically.</p>
-        <p>None of that is in scope for this demonstration. But arriving at it organically — through the rebuild, not through a product brief. That's the point. The best product questions come from actually using the thing you built.</p>
-      </div>
-
-      <div style="padding: 40px 0 16px;" class="fade-in">
-        <a href="ssm-part1.html" class="cs-next" style="border-top: none; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
-          <div>
-            <div class="cs-next-label">← Back to</div>
-            <div class="cs-next-title">Part 1 — The original build</div>
-          </div>
-          <span class="cs-next-arrow">←</span>
-        </a>
-        <a href="wayfair.html" class="cs-next">
-          <div>
-            <div class="cs-next-label">Next project</div>
-            <div class="cs-next-title">Wayfair: Spatial Logistics & Mapping</div>
-          </div>
-          <span class="cs-next-arrow">→</span>
-        </a>
       </div>
     </div>
-  </div>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <div class="nav-brand">Ricky <span style="color:var(--orange)">Castillo</span></div>
-          <p>UX & Systems Designer based in Burnaby, BC.</p>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <div class="nav-brand">
+              Ricky <span style="color: var(--orange)">Castillo</span>
+            </div>
+            <p>UX & Systems Designer based in Burnaby, BC.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Work</h4>
+            <a href="ssm-part1.html">SSM — Part 1</a>
+            <a href="ssm-part2.html">SSM — Part 2 ✦</a>
+            <a href="wayfair.html">Wayfair</a>
+            <a href="booking.html">Booking Flow</a>
+          </div>
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="https://www.linkedin.com/in/rickycastillo1" target="_blank"
+              >LinkedIn ↗</a
+            >
+            <a
+              href="../links/Ricky_Castillo_UX_Systems_Designer_General.pdf"
+              target="_blank"
+              download
+              >Resume ↗</a
+            >
+          </div>
         </div>
-        <div class="footer-col">
-          <h4>Work</h4>
-          <a href="ssm-part1.html">SSM — Part 1</a>
-          <a href="ssm-part2.html">SSM — Part 2 ✦</a>
-          <a href="wayfair.html">Wayfair</a>
-          <a href="booking.html">Booking Flow</a>
-        </div>
-        <div class="footer-col">
-          <h4>Connect</h4>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-          <a href="https://www.linkedin.com/in/rickycastillo1" target="_blank">LinkedIn ↗</a>
-          <a href="../links/Ricky_Castillo_UX_Systems_Designer_General.pdf" target="_blank" download>Resume ↗</a>
+        <div class="footer-bottom">
+          <p>© 2026 Ricky Castillo. Designed and built from scratch.</p>
+          <p style="color: var(--text-dim); font-size: 11px">
+            Burnaby, BC · Available for remote work
+          </p>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Ricky Castillo. Designed and built from scratch.</p>
-        <p style="color:var(--text-dim); font-size:11px;">Burnaby, BC · Available for remote work</p>
-      </div>
-    </div>
-  </footer>
-  <script src="../js/main.js"></script>
-  <script>
-    // Auto-size iframes to their full inner document height after load
-    document.querySelectorAll('.cs-mockup-iframe').forEach(function(iframe) {
-      function resize() {
-        try {
-          var doc = iframe.contentDocument;
-          var h = doc.body ? doc.body.scrollHeight : doc.documentElement.scrollHeight;
-          if (h > 200) iframe.style.height = h + 'px';
-        } catch(e) {}
-      }
-      iframe.addEventListener('load', function() {
-        resize();
-        setTimeout(resize, 400);
-      });
-    });
-
-    // Listen for height reports from child iframes (postMessage — more accurate than scrollHeight)
-    window.addEventListener('message', function(e) {
-      if (e.data && e.data.type === 'csIframeHeight') {
-        var selector = e.data.id === 'call-guides'
-          ? '[src="ssm_call_guides_l2.html"]'
-          : '[src="ssm_home_hub_v4.html"]';
-        var iframe = document.querySelector(selector);
-        if (iframe && e.data.height > 200) {
-          iframe.style.height = e.data.height + 'px';
+    </footer>
+    <script src="../js/main.js"></script>
+    <script>
+      // Auto-size iframes to their full inner document height after load
+      document.querySelectorAll(".cs-mockup-iframe").forEach(function (iframe) {
+        function resize() {
+          try {
+            var doc = iframe.contentDocument;
+            var h = doc.body
+              ? doc.body.scrollHeight
+              : doc.documentElement.scrollHeight;
+            if (h > 200) iframe.style.height = h + "px";
+          } catch (e) {}
         }
-      }
-    });
+        iframe.addEventListener("load", function () {
+          resize();
+          setTimeout(resize, 400);
+        });
+      });
 
-  </script>
+      // Listen for height reports from child iframes (postMessage — more accurate than scrollHeight)
+      window.addEventListener("message", function (e) {
+        if (e.data && e.data.type === "csIframeHeight") {
+          var selector =
+            e.data.id === "call-guides"
+              ? '[src="ssm_call_guides_l2.html"]'
+              : '[src="ssm_home_hub_v4.html"]';
+          var iframe = document.querySelector(selector);
+          if (iframe && e.data.height > 200) {
+            iframe.style.height = e.data.height + "px";
+          }
+        }
+      });
+    </script>
 
-  <script src="../js/lightbox.js"></script>
-</body>
+    <script src="../js/lightbox.js"></script>
+  </body>
 </html>
