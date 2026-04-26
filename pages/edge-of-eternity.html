@@ -269,6 +269,26 @@
       .eoe-decisions  { grid-template-columns: 1fr; }
       .eoe-compare    { grid-template-columns: 1fr; }
       .eoe-anno-grid  { grid-template-columns: 1fr !important; }
+
+      /* Table: remove scroll wrapper, hide arrow + rationale columns */
+      .eoe-table-wrap {
+        overflow-x: visible;
+        border: none;
+        border-radius: 0;
+        margin: 20px 0;
+      }
+      .eoe-table-wrap .eoe-ia-table {
+        min-width: unset;
+        width: 100%;
+      }
+      /* Hide arrow col (2nd) and Rationale col (5th) */
+      .eoe-ia-table th:nth-child(2),
+      .eoe-ia-table td:nth-child(2),
+      .eoe-ia-table th:nth-child(5),
+      .eoe-ia-table td:nth-child(5) { display: none; }
+
+      .eoe-ia-table thead th { font-size: 9px; padding: 8px 10px; }
+      .eoe-ia-table tbody td { padding: 9px 10px; font-size: 12px; }
     }
   </style>
 </head>
