@@ -252,9 +252,23 @@
       margin-top: 1px;
     }
 
+    .eoe-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 28px 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+    .eoe-table-wrap .eoe-ia-table {
+      margin: 0;
+      min-width: 560px;
+      border-radius: 0;
+    }
+
     @media (max-width: 720px) {
-      .eoe-decisions { grid-template-columns: 1fr; }
-      .eoe-compare   { grid-template-columns: 1fr; }
+      .eoe-decisions  { grid-template-columns: 1fr; }
+      .eoe-compare    { grid-template-columns: 1fr; }
+      .eoe-anno-grid  { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -432,7 +446,7 @@
         <h2>Menu Architecture Revamped.</h2>
         <p>Adjusted the infrastructure of the main menu to be more cohesive. Every item in the original nav had to earn its place in the redesign, or get merged, renamed, or moved.</p>
 
-        <table class="eoe-ia-table">
+        <div class="eoe-table-wrap"><table class="eoe-ia-table">
           <thead>
             <tr>
               <th>Original</th>
@@ -514,7 +528,7 @@
               <td>Food buff bar added.</td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
         <div class="ia-result">Result: 7 distinct menu nav items / 4 merged or moved / 2 renamed</div>
       </div>
 
@@ -562,7 +576,7 @@
         <h2>From First Pass to Final.</h2>
         <p>The first high-fidelity pass was tonally correct but visually overdressed. I toned down visual elements to keep the focus on important details.</p>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0;">
+        <div class="eoe-anno-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0;">
           <div>
             <div class="eoe-anno-group-label good" style="margin-bottom: 10px;">The Good</div>
             <div class="eoe-anno">
