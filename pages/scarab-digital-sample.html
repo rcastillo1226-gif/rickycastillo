@@ -78,38 +78,37 @@
       <p class="cs-hero-desc">A teen hockey player is in their bedroom the night before a rivalry game. Their phone lights up as posts and messages start flooding in about tomorrow's match. This is a scripted story beat. The UI needed to feel believable, readable on camera, and true to who this character is.</p>
     </section>
 
-    <div class="cs-body">
-
-      <div class="cs-section fade-in">
-        <div class="cs-section-label">Process · Figma Workspace</div>
-        <figure class="cs-full-img" style="margin-top: 16px;">
-          <img src="../images/scarab_digital_workspace_image.png" alt="Figma workspace showing the lock screen notification burst design for the teen hockey drama scene" />
-        </figure>
-      </div>
-
-      <div class="cs-section fade-in">
-        <div class="cs-section-label">Final Animation</div>
-        <figure class="cs-full-img" style="margin-top: 16px; background: #000;">
-          <video controls playsinline preload="metadata" poster="../images/scarab_digital_phone_screen_img.png" style="width:100%; display:block;">
-            <source src="../images/Scarab_Digital_Project_Animation.mp4" type="video/mp4" />
-            Your browser does not support video playback.
-          </video>
-        </figure>
-        <div style="margin-top: 24px;">
-          <a href="https://www.figma.com/proto/CmISlI8dKy6vSnyLCtYZ7q/Scarab-Digital-Project?node-id=2-6&p=f&viewport=119%2C416%2C0.37&t=cAdURTeGFWdMZjHZ-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A2&page-id=0%3A1" class="scarab-proto-link" target="_blank" rel="noopener">
-            View Interactive Prototype →
-          </a>
-        </div>
-      </div>
-
-      <div class="cs-section fade-in" style="border-bottom: none;">
-        <div class="cs-section-label">A Note on Tools</div>
-        <p>This sample was built in Figma using Smart Animate for the prototype sequence. With full ProtoPie and After Effects access I would add scripted notification sound effects, physical scroll interaction as notifications arrive, animated motion layers, and timing triggers locked to specific story beats, matching exactly how Scarab describes their on-set playback workflow.</p>
-      </div>
-
+    <!-- Figma Workspace -->
+    <div class="fade-in" style="padding: 56px 0 0; border-top: 1px solid var(--border);">
+      <div class="cs-section-label" style="margin-bottom: 16px;">Process · Figma Workspace</div>
+      <figure class="cs-hero-img">
+        <img src="../images/scarab_digital_workspace_image.png" alt="Figma workspace showing the lock screen notification burst design for the teen hockey drama scene" />
+      </figure>
     </div>
 
-    <div style="padding: 40px 0 64px;" class="fade-in">
+    <!-- Final Animation -->
+    <div class="fade-in" style="padding: 56px 0 0; border-top: 1px solid var(--border); margin-top: 56px;">
+      <div class="cs-section-label" style="margin-bottom: 16px;">Final Animation</div>
+      <figure class="cs-hero-img" style="background: #000;">
+        <video controls playsinline preload="metadata" poster="../images/scarab_digital_phone_screen_img.png" style="width:100%; display:block;">
+          <source src="../images/Scarab_Digital_Project_Animation.mp4" type="video/mp4" />
+          Your browser does not support video playback.
+        </video>
+      </figure>
+      <div style="margin-top: 24px;">
+        <a href="https://www.figma.com/proto/CmISlI8dKy6vSnyLCtYZ7q/Scarab-Digital-Project?node-id=2-6&p=f&viewport=119%2C416%2C0.37&t=cAdURTeGFWdMZjHZ-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A2&page-id=0%3A1" class="scarab-proto-link" target="_blank" rel="noopener">
+          View Interactive Prototype →
+        </a>
+      </div>
+    </div>
+
+    <!-- A Note on Tools -->
+    <div class="fade-in" style="padding: 56px 0; border-top: 1px solid var(--border); margin-top: 56px; max-width: 720px;">
+      <div class="cs-section-label" style="margin-bottom: 12px;">A Note on Tools</div>
+      <p style="color: var(--text-muted); line-height: 1.8; font-size: 16px;">This sample was built in Figma using Smart Animate for the prototype sequence. With full ProtoPie and After Effects access I would add scripted notification sound effects, physical scroll interaction as notifications arrive, animated motion layers, and timing triggers locked to specific story beats, matching exactly how Scarab describes their on-set playback workflow.</p>
+    </div>
+
+    <div style="padding: 0 0 64px;" class="fade-in">
       <a href="../index.html" class="cs-next" style="border-top: none;">
         <div>
           <div class="cs-next-label">View the rest of my portfolio</div>
@@ -153,5 +152,22 @@
 
   <script src="../js/main.js"></script>
   <script src="../js/lightbox.js"></script>
+  <script>
+    // Extend lightbox to cover full-width images outside .cs-body on this page
+    document.querySelectorAll('.cs-hero-img img').forEach(function(img) {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var lb = document.getElementById('cs-lightbox');
+        var lbImg = document.getElementById('cs-lightbox-img');
+        var lbCap = document.getElementById('cs-lightbox-cap');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt || '';
+        lbCap.textContent = '';
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+  </script>
 </body>
 </html>
